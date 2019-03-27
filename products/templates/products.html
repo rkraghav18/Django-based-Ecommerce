@@ -39,7 +39,13 @@
 
                     </form>
                                 {% endif %}
-
+                            {%  if user.is_authenticated %}
+                                <form action="{% url 'add_cart' product.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_name" value="{{ user.email }}">
+                            <button style="font-size:24px">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+                            </form>
+                            {% endif %}
                             </span>
                         </div>
                 </div>

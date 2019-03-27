@@ -11,3 +11,8 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.image)
+
+
+class Cart(models.Model):
+    p_id=models.IntegerField()
+    user_name=models.CharField(max_length=100)

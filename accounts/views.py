@@ -49,6 +49,7 @@ def register(request):
             user_form.save()
             user_name=request.POST.get('username')
             password=request.POST.get('password1')
+            user_email=request.POST.get('email')
 
             user = auth.authenticate(username=request.POST.get('username'),
                                      password=request.POST.get('password1'))
@@ -58,7 +59,23 @@ def register(request):
                 insertAccount=userAccounts.objects.create(userName=user_name,password=password)
                 insertAccount.save()
                 messages.success(request, "You have successfully registered")
-
+                from django.core.mail import EmailMessage
+                #
+                # email = EmailMessage('title', 'body', to=[user_email])
+                # email.send()
+                # import smtplib
+                #
+                # FROM = "aryansharma23124@gmail.com"
+                # TO = user_email
+                # pwd=""
+                # SUBJECT = "Registeration"
+                # TEXT = "You have been Successfully Registered"
+                # server = smtplib.SMTP("smtp.gmail.com", 587)
+                # server.ehlo()
+                # server.starttls()
+                # server.login(FROM, pwd)
+                # server.sendmail(FROM, TO,TEXT)
+                # server.close()
                 if request.GET and request.GET['next'] != '':
                     next = request.GET['next']
                     return HttpResponseRedirect(next)
