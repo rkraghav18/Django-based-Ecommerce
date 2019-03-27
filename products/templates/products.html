@@ -11,22 +11,37 @@
         {% for product in products %}   
         
             <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
-                
+
                 <div class="panel-body">
                    <div class="product" style="background-image: url('{{ product.image }}')"></div>
                     
                     <h3 class="text-center">{{ product.name }}</h3>
                     <p class="product-description text-center">{{ product.description }}</p>
                     <p class="text-center">Rs.{{ product.price }}</p>
-                    
+                                           <div class="input-group" style="text-align: center;">
+                            <span class="input-group-btn">
+                    {% if user.is_authenticated %}
+
                     <form method="post" action="{% url 'compare' product.name %}">
                         {% csrf_token %}
-                        <div class="input-group" style="text-align: center;">
-                            <span class="input-group-btn">
+
+
                                 <a href="compare/{{product.name}}"><button class="btn btn-success">Compare</button></a>
+
+                    </form>
+                    {% else %}
+
+                    <form method="post" action="{% url 'login'%}">
+                        {% csrf_token %}
+
+
+                                <button class="btn btn-success">Log in to Compare</button>
+
+                    </form>
+                                {% endif %}
+
                             </span>
                         </div>
-                    </form>
                 </div>
             </div>
         {% endfor %}

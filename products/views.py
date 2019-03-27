@@ -12,4 +12,9 @@ def all_products(request):
 def compare(request,name):
     name=Product.objects.filter(name=name)
     return render(request, "result.html", {"name": name})
- 
+
+
+def buy(request,id):
+    details = Product.objects.filter(id=id)
+    return render(request, "payment.html", {"details": details})
+

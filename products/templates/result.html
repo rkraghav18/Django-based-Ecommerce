@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="row row-flex">
+<div class="row row-flex" xmlns="http://www.w3.org/1999/html">
     {% for product in name %}
 
     <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-default">
-
+    <form method="post" action="{% url 'buy' product.id %}">
+        {% csrf_token %}
         <div class="panel-body">
             <div class="product" style="background-image: url('{{ product.image }}')"></div>
 
             <h3 class="text-center">{{ product.name }}</h3>
             <p class="product-description text-center">{{ product.description }}</p>
             <p class="text-center">Rs.{{ product.price }}</p>
-
+            <center><a href="buy/{{product.id}}"><button class="btn btn-success">Buy</button></a></center>
+        </form>
 
         </div>
     </div>
