@@ -25,6 +25,13 @@ def add_cart(request,id):
     products = Product.objects.all()
     return render(request, "products.html", {"products": products})
 
+def view_cart(request):
+    user_name=request.POST.get("user_name")
+    filter=Cart.objects.filter(user_name=user_name).values_list('id',flat=True)
+    object_filter=Product.objects.filter(id__in=filter)
+    return render(request,"cart_show.html",{"object_filter":object_filter})
+
+
    # user_name=request.POST.get("username")
 
 

@@ -56,12 +56,17 @@
                         <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
                     {% endif %}
                     <li>
-                        <a href="{% url 'view_cart' %}">
-                            <i class="fa fa-shopping-cart"></i> Cart 
-                            {% if product_count > 0 %}
-                            <label class="badge badge-warning">{{ product_count }}</label>
-                            {% endif %}
-                        </a>
+                    <form action="{%  url 'cart_view' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_name" value="{{ user.email }}">
+                            <button style="font-size:24px">View <i class="fa fa-shopping-cart"></i></button>
+                            </form>
+{#                        <a href="{% url 'cart_view' %}">#}
+{#                            <i class="fa fa-shopping-cart"></i> Cart #}
+{#                            {% if product_count > 0 %}#}
+{#                            <label class="badge badge-warning">{{ product_count }}</label>#}
+{#                            {% endif %}#}
+{#                        </a>#}
                     </li>
                     <li>
                         <form class="navbar-form" action="{% url 'search' %}" method="get" role="search">
